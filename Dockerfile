@@ -1,9 +1,17 @@
-# ===== Stage 1: Build =====
-FROM maven:3.9.2-eclipse-temurin-17 AS build
-WORKDIR /app
-
-# Copiar arquivos do projeto
+COPY src ./src
 COPY pom.xml .
+
+
+# ===== Stage 1: Build =====
+RUN mvn clean package -DskipTests
+
+
+# Copiar o pom.xml e baixar dependências primeiro (para cache eficiente)
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copiar o código-fonte
+COPY src ./src
 
 # Build do projeto (gera o JAR)
 RUN mvn clean package -DskipTests

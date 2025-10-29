@@ -1,4 +1,4 @@
-package com.seuprojeto.biblioteca;
+package com.exemplo.biblioteca; // <-- o nome do pacote precisa bater com a pasta
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

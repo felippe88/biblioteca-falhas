@@ -1,6 +1,10 @@
+COPY src ./src
+COPY pom.xml .
+
+
 # ===== Stage 1: Build =====
-FROM maven:3.9.2-eclipse-temurin-17 AS build
-WORKDIR /app
+RUN mvn clean package -DskipTests
+
 
 # Copiar o pom.xml e baixar dependências primeiro (para cache eficiente)
 COPY pom.xml .
